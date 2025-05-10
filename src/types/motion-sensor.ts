@@ -211,6 +211,12 @@ export class MotionSensor {
             const videoUrl = `https://drive.google.com/drive/search?q=video-${timestamp}.mp4`; // Modify with the actual URL path
             const imageUrl = `https://drive.google.com/drive/search?q=screenshot-${timestamp}.jpg`; // Modify with the actual URL path
             const imagePath: string = directoryPath + `\\screenshot-${timestamp}.jpg`;
+
+            // 跳过Gradio调用，直接发送通知
+            console.log('Gradio integration temporarily disabled');
+            this.sendNotification(MotiondetectedString + '\n' + '[Gradio analysis disabled]' + '\n' + imageUrl + '\n' + videoUrl);
+
+            /* 原来的Gradio代码已被注释
             const prompt: string = GradioPromptString;
             // console.log('PythonBinPath:', PythonBinPath);
             // console.log('pythonScriptPath:', pythonScriptPath);
@@ -232,7 +238,7 @@ export class MotionSensor {
             } else {
                 console.error('Python script file does not exist:', pythonScriptPath);
             }
-
+            */
 
         } catch (error) {
             console.error('Error calling Python script:', error);
