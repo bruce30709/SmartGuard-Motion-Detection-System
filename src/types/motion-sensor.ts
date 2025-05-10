@@ -127,21 +127,17 @@ export class MotionSensor {
         if (isOccupied) {
             console.log(`Motion detected on sensor ${service.serviceName}`);
             // Add custom actions here, e.g., turning on lights, sending notifications, etc.
-            if (service.accessoryInformation.Manufacturer.toLowerCase().includes('tp-link')) {
-                console.log('Handling TP-Link device specific actions');
-                // Add TP-Link specific actions here
-                try {
-                    // Notify first
-                    const timestamp = this.formatDate(new Date());
+            try {
+                // Notify first
+                const timestamp = this.formatDate(new Date());
 
-                    // Take screenshot
-                    await this.takeScreenshot(timestamp);
+                // Take screenshot
+                await this.takeScreenshot(timestamp);
 
-                    // Start recording
-                    await this.startRecording(timestamp);
-                } catch (error) {
-                    console.error("Error during motion detection handling:", error);
-                }
+                // Start recording
+                await this.startRecording(timestamp);
+            } catch (error) {
+                console.error("Error during motion detection handling:", error);
             }
 
         } else {
@@ -180,7 +176,15 @@ export class MotionSensor {
 
         // Command to capture a single frame
         const command = `${ffmpegPath} -rtsp_transport tcp -i "${rtspString}" -vframes 1 -q:v 2 "${outputPath}"`;
+        console.log('Executing screenshot command:', command);
+
         child_process.exec(command, (error, stdout, stderr) => {
+            // Always log stdout and stderr for debugging
+
+            if (stderr) {
+                console.debug('Screenshot stderr:', stderr);
+            }
+
             if (error) {
                 console.error('Error executing ffmpeg:', error);
                 return;
@@ -193,9 +197,15 @@ export class MotionSensor {
         const outputPath = directoryPath + `\\video-${timestamp}.mp4`;
         // Construct the ffmpeg command
         const command = `${ffmpegPath} -rtsp_transport tcp -i ${rtspString} -c:v libx264 -preset ultrafast -t 10 ${outputPath}`;
+        console.log('Executing recording command:', command);
 
         // Execute the ffmpeg command
         child_process.exec(command, (error, stdout, stderr) => {
+            // Always log stdout and stderr for debugging
+            if (stderr) {
+                console.debug('Recording stderr:', stderr);
+            }
+
             if (error) {
                 console.error('Error executing ffmpeg:', error);
                 return;

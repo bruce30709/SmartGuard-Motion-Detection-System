@@ -24,8 +24,8 @@
     "prepublishOnly": "npm run build"
   },
   "engines": {
-    "node": ">=10.17.0",
-    "homebridge": ">=1.0.0"
+    "homebridge": "^1.0.0 || ^1.6.0 || ^2.0.0-beta.0",
+    "node": "^10.17.0 || ^14.0.0 || ^18.20.4 || ^20.7.0 || ^22"
   },
   "funding": [
     {
@@ -55,8 +55,9 @@
   "dependencies": {
     "@google-cloud/local-auth": "3.0.1",
     "@oznu/ws-connect": "^2.2.0",
-    "axios": "1.6.8",
+    "axios": "1.9.0",
     "dotenv": "16.4.5",
+    "ffmpeg-for-homebridge": "2.1.7",
     "fs-extra": "^9.0.1",
     "googleapis": "134.0.0",
     "rxjs": "^6.6.3"
@@ -77,11 +78,5 @@
     "rimraf": "^3.0.2",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
-  },
-  "bundleDependencies": [
-    "@oznu/ws-connect",
-    "fs-extra",
-    "hap-node-client",
-    "rxjs"
-  ]
+  }
 }
