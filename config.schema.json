@@ -2,8 +2,7 @@
   "pluginAlias": "google-smarthome",
   "pluginType": "platform",
   "singular": true,
-  "customUi": true,
-  "customUiPath": "./dist/homebridge-ui",
+  "customUi": false,
   "customUiDevServer": "http://localhost:4500",
   "headerDisplay": "## Homebridge Config UI X Upgrade Required\nhomebridge-config-ui-x v4.6.0 or later is required to configure this plugin correctly. If you are seeing this message you need to upgrade (or reload the UI).\n",
   "footerDisplay": "Search for [Homebridge in the Google Home app](https://assistant.google.com/services/a/uid/000000b558f0d5d1?hl=en) and link the action to complete setup.",
@@ -14,18 +13,15 @@
         "title": "Name",
         "type": "string",
         "default": "Google Smart Home",
-        "minLength": 1,
-        "required": true
+        "minLength": 1
       },
       "token": {
         "title": "Token",
-        "type": "string",
-        "required": true
+        "type": "string"
       },
       "notice": {
         "title": "Notice",
         "type": "string",
-        "required": true,
         "default": "Keep your token a secret!"
       },
       "twoFactorAuthPin": {
@@ -69,8 +65,19 @@
       "forceFahrenheit": {
         "title": "Force Degrees Fahrenheit",
         "type": "boolean"
+      },
+      "schemaVersion": {
+        "title": "Schema Version",
+        "type": "string",
+        "default": "1.0.0",
+        "description": "Internal use only - do not change"
       }
-    }
+    },
+    "required": [
+      "name",
+      "token",
+      "notice"
+    ]
   },
   "layout": [
     {
